@@ -4,7 +4,6 @@
             class="drawer-panel" 
             :class="{'drawer-open':open}"
             @transitionend="transitionend"
-            @transitionstart="transitionstart"
         >
             <slot></slot>
         </div>
@@ -24,15 +23,17 @@ export default {
             show:false
         }
     },
+    watch:{
+        open (val) {
+            if(val){
+                this.show = true;
+            }
+        }
+    },
     methods:{
         transitionend(){
             if(!this.open){
                 this.show = false;
-            }
-        },
-        transitionstart(e){
-            if(this.open){
-                this.show = true;
             }
         }
     }
