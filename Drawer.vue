@@ -1,5 +1,5 @@
 <template>
-    <div class="drawer" :class="{'drawer-show':show}">
+    <div v-if="mask" class="drawer" :class="{'drawer-show':show}">
         <div 
             class="drawer-panel" 
             :class="{'drawer-open':open}"
@@ -8,6 +8,14 @@
             <slot></slot>
         </div>
     </div>
+    <div 
+        v-else
+        class="drawer-panel drawer-no-mask-panel" 
+        :class="{'drawer-open':open}"
+        @transitionend="transitionend"
+    >
+        <slot></slot>
+    </div>
 </template>
 
 <script>
@@ -15,6 +23,9 @@ export default {
     props:{
         open:{
             required:true,
+            type:Boolean
+        },
+        mask:{
             type:Boolean
         }
     },
@@ -57,6 +68,11 @@ export default {
         background:#fff;
         transition: transform .3s;
         transform: translateX(100%);
+    }
+    .drawer-no-mask-panel{
+        position: fixed;
+        top:0;
+        right:0;
     }
     .drawer-show{
         visibility:visible;
