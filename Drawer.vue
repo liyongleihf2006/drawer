@@ -26,7 +26,8 @@ export default {
             type:Boolean
         },
         mask:{
-            type:Boolean
+            type:Boolean,
+            default:true
         }
     },
     data(){
